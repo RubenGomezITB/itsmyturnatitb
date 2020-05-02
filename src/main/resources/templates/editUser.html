@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Afegir Empleat</title>
+</head>
+<body>
+
+<form method="post" action="#" th:action="@{/admin/users/edit/submit}" th:object="${userForm}">
+
+    Id <input type="hidden" id="id" placeholder="1" th:field="*{id}" readonly="readonly"><br/>
+    Name <input type="text" id="name" placeholder="Name" th:field="*{name}"><br/>
+    Email <input type="text" id="email" placeholder="a@a.com" th:field="*{email}"><br/>
+   <!-- isTeacher <input type="checkbox" id="isTeacher" th:field="*{isTeacher}"><br/>-->
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>

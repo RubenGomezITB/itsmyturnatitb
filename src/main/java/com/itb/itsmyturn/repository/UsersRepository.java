@@ -19,4 +19,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer>{
 
     @Override
     Optional<Users> findById(Integer integer);
+
+    @Override
+    List<Users> findAll();
 }
