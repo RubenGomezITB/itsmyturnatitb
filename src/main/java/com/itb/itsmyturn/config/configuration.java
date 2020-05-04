@@ -28,20 +28,19 @@ public class configuration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/", "/register", "/api/v1/**").permitAll()
+                .antMatchers("/**", "/register", "/api/v1/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .loginPage("/login")
-                    .defaultSuccessUrl("/admin")
+                    .defaultSuccessUrl("/dashboard")
                     .permitAll()
                     .and()
                 .logout()
@@ -49,6 +48,4 @@ public class configuration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
-
-
 }

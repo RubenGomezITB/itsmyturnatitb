@@ -17,9 +17,18 @@ public interface SubjectsRepository extends JpaRepository<Subjects, Integer> {
     @Query(value = "from Subjects where idTeacher = ?1")
     List<Subjects> findById(int id);
 
+    @Query(value = "from Subjects where id = ?1")
+    Subjects findOneByPrimaryKey(int id);
+
     @Override
     <S extends Subjects> List<S> findAll(Example<S> example);
 
     @Override
     <S extends Subjects> S save(S s);
+
+    @Override
+    void delete(Subjects subjects);
+
+    @Override
+    void deleteById(Integer integer);
 }

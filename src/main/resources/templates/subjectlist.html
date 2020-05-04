@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,13 +13,13 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin}">Home</a>
+                <a class="nav-link" th:href="@{/dashboard}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/users/list}">Users</a>
+                <a class="nav-link" th:href="@{/users/list}">Users</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{/admin/subjects/list}">Subjects</a>
+                <a class="nav-link" th:href="@{/subjects/list}">Subjects</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0 ml-auto">
@@ -34,8 +34,8 @@
                 <th scope="col" class="text-center">Teacher ID</th>
                 <th scope="col" class="text-center">Subject</th>
                 <th scope="col" class="text-center">Group</th>
-                <th scope="col" class="text-center">Edit</th>
-                <th scope="col" class="text-center">Remove</th>
+                <th sec:authorize="hasAuthority('ADMIN')" scope="col" class="text-center">Edit</th>
+                <th sec:authorize="hasAuthority('ADMIN')" scope="col" class="text-center">Remove</th>
             </tr>
             </thead>
             <tbody>
@@ -44,8 +44,8 @@
                 <td class="text-center" th:text="${s.idTeacher}">3</td>
                 <td class="text-center" th:text="${s.subjectName}">Administracion de sistemas</td>
                 <td class="text-center" th:text="${s.userGroup}">DAM</td>
-                <td class="text-center"><a th:href="@{/admin/subjects/list/edit/{id}(id=${s.id})}"><i class="fas fa-user-edit"></i></a></td>
-                <td class="text-center"><a th:href="@{/admin/subjects/list/delete(id=${s.id})}"><i class="fas fa-user-minus"></i></a></td>
+                <td sec:authorize="hasAuthority('ADMIN')" class="text-center"><a th:href="@{/admin/subjects/list/edit/{id}(id=${s.id})}"><i class="fas fa-user-edit"></i></a></td>
+                <td sec:authorize="hasAuthority('ADMIN')" class="text-center"><a th:href="@{/admin/subjects/list/delete(id=${s.id})}"><i class="fas fa-user-minus"></i></a></td>
             </tr>
             </tbody>
         </table>

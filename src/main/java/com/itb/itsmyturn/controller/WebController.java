@@ -1,11 +1,10 @@
 package com.itb.itsmyturn.controller;
 
+import com.itb.itsmyturn.model.Subjects;
 import com.itb.itsmyturn.model.Users;
 import com.itb.itsmyturn.model.Webuser;
 import com.itb.itsmyturn.repository.SubjectsRepository;
-import com.itb.itsmyturn.repository.TurnsRepository;
 import com.itb.itsmyturn.repository.UsersRepository;
-import com.itb.itsmyturn.service.TurnService;
 import com.itb.itsmyturn.service.WebUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +20,11 @@ public class WebController {
     @Autowired
     private UsersRepository usersRepository;
 
+    @GetMapping("/")
+    public String root(){
+        return "login";
+    }
+
     @GetMapping("/login")
     public String login(){
         return "login";
@@ -31,9 +35,9 @@ public class WebController {
         return "error";
     }
 
-    @GetMapping("/admin")
-    public String admin(){
-        return "admin";
+    @GetMapping("/dashboard")
+    public String dashboard(){
+        return "dashboard";
     }
 
     @GetMapping("/register")
@@ -48,13 +52,13 @@ public class WebController {
         return "redirect:/login";
     }
 
-    @GetMapping("/admin/subjects/list")
+    @GetMapping("/subjects/list")
     public String getAllSubjects(Model m){
         m.addAttribute("SubjectList", subjectsRepository.findAll());
         return "subjectlist";
     }
 
-    @GetMapping("/admin/users/list")
+    @GetMapping("/users/list")
     public String getAllUsers(Model m){
         m.addAttribute("UserList", usersRepository.findAll());
         return "users";
@@ -63,13 +67,13 @@ public class WebController {
     @GetMapping("/admin/users/delete")
     public String eliminarEmpleat(@RequestParam int id){
         service.delete(id);
-        return "redirect:/admin/users/list";
+        return "redirect:/users/list";
     }
 
     @PostMapping("/admin/users/edit/submit")
     public String substituirSubmit(@ModelAttribute("userForm") Users user){
         service.modify(user);
-        return "redirect:/admin/users/list";
+        return "redirect:/users/list";
     }
 
     @GetMapping("/admin/users/edit/{email}")
@@ -77,5 +81,24 @@ public class WebController {
         Users user=usersRepository.findByEmail(email);
         m.addAttribute("userForm", user);
         return "editUser";
+    }
+
+    @GetMapping("/admin/subjects/list/delete")
+    public String eliminarSubject(@RequestParam int id){
+        service.deleteSubject(id);
+        return "redirect:/admin/subjects/list";
+    }
+
+    @PostMapping("/admin/subjects/list/edit/submit")
+    public String modificarSubjectSubmit(@ModelAttribute("subjectForm") Subjects subjects){
+        service.modifySubject(subjects);
+        return "redirect:/admin/subjects/list";
+    }
+
+    @GetMapping("/admin/subjects/list/edit/{id}")
+    public String modificarSubject(@PathVariable int id, Model m){
+        Subjects subject = subjectsRepository.findOneByPrimaryKey(id);
+        m.addAttribute("subjectForm", subject);
+        return "editSubject";
     }
 }

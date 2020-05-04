@@ -1,7 +1,9 @@
 package com.itb.itsmyturn.service;
 
+import com.itb.itsmyturn.model.Subjects;
 import com.itb.itsmyturn.model.Users;
 import com.itb.itsmyturn.model.Webuser;
+import com.itb.itsmyturn.repository.SubjectsRepository;
 import com.itb.itsmyturn.repository.UsersRepository;
 import com.itb.itsmyturn.repository.WebuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class WebUserService {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private SubjectsRepository subjectsRepository;
 
     public void registerUser(Webuser user) throws Exception {
         Webuser u = webuserRepository.findByEmail(user.getEmail());
@@ -40,4 +45,13 @@ public class WebUserService {
     public void modify(Users user){
         usersRepository.save(user);
     }
+
+    public void deleteSubject(int id){
+        subjectsRepository.deleteById(id);
+    }
+
+    public void modifySubject(Subjects subjects){
+        subjectsRepository.save(subjects);
+    }
 }
+

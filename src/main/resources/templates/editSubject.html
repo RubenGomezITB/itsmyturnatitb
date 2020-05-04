@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Afegir Empleat</title>
+    <title>Editar Subejct</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -15,10 +15,10 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/admin}">Home</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/admin/users/list}">Users</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/admin/subjects/list}">Subjects</a>
             </li>
         </ul>
@@ -26,23 +26,19 @@
             <a th:href="@{/logout}" class="btn btn-outline-danger my-2 my-sm-0">Log Out</a>
         </form>
     </nav>
-    <form method="post" action="#" th:action="@{/admin/users/edit/submit}" th:object="${userForm}">
+    <form method="post" action="#" th:action="@{/admin/subjects/list/edit/submit}" th:object="${subjectForm}">
         <div class="form-group">
             <input type="hidden" id="id" placeholder="1" th:field="*{id}" readonly="readonly"><br/>
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}"><br/>
+            <label for="subejctName">Subject name</label>
+            <input type="text" class="form-control" id="subejctName" th:field="*{subjectName}"><br/>
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="a@a.com" th:field="*{email}"><br/>
+            <label for="userGroup">Group</label>
+            <input type="text" class="form-control" id="userGroup" th:field="*{userGroup}"><br/>
         </div>
-        <input type="hidden" id="password" placeholder="password" th:field="*{password}" readonly="readonly"><br/>
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="isteacher" th:field="*{isteacher}">
-            <label class="custom-control-label" for="isteacher">Is teacher?</label>
-        </div>
+        <input type="hidden" id="teacher" placeholder="password" th:field="*{idTeacher}" readonly="readonly"><br/>
         <div class="col text-center">
-        <button type="submit" class="btn btn-primary">Edit user</button>
+        <button type="submit" class="btn btn-primary">Edit subject</button>
         </div>
     </form>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

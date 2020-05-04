@@ -29,12 +29,20 @@ public class Users implements Serializable {
     private String password;
 
     @Column(name = "isteacher", nullable = false)
-    private boolean isTeacher = false;
+    private boolean isteacher = false;
 
-    public Users(String name, String email, String password, boolean isTeacher) {
+    public Users(String name, String email, String password, boolean isteacher) {
         name = this.name;
         email = this.email;
         password = this.password;
-        isTeacher = this.isTeacher;
+        isteacher = this.isteacher;
+    }
+
+    public boolean isTeacher() {
+        return isteacher;
+    }
+
+    public void setTeacher(boolean teacher) {
+        isteacher = teacher;
     }
 }
